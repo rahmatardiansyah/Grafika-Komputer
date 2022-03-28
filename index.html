@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grafika Komputer</title>
+    <style>
+      #canvas1 {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas1" height="400" width="400"></canvas>
+    <script>
+      // dom
+      var kanvasPraktikum = document.querySelector('#canvas1')
+
+      function gambarTitik(temp, x, y, r, g, b, a) {
+        var index = 4 * (x + y * kanvasPraktikum.width)
+        imageDataPraktikum.data[index] = r
+        imageDataPraktikum.data[index + 1] = g
+        imageDataPraktikum.data[index + 2] = b
+        imageDataPraktikum.data[index + 3] = a
+      }
+
+      function a_dd(imageData, x1, y1, x2, y2, r = 255, g = 0, b = 0) {
+        var dx = x2 - x1
+        var dy = y2 - y1
+
+        if (Math.abs(dx) > Math.abs(dy)) {
+          // jalan ke sumbu x
+          if (x2 > x1) {
+            // ke kanan
+            var y = y1 // titik y awal
+            for (var x = x1; x < x2; x++) {
+              y = y + dy / Math.abs(dx)
+              gambarTitik(imageData, x, y, r, g, b)
+            }
+          } else {
+            // ke kiri
+            var y = y1
+            for (var x = x1; x > x2; x--) {
+              y = y + dy / Math.abs(dx)
+              gambarTitik(imageData, x, y, r, g, b)
+            }
+          }
+        } else {
+          // jalan ke sumbu y
+          if (y2 > y1) {
+            // ke kanan
+            var x = x1 // titik y awal
+            for (var y = y1; y < y2; y++) {
+              x = x + dx / Math.abs(dy)
+              gambarTitik(imageData, x, y, r, g, b)
+            }
+          } else {
+            // ke kiri
+            var x = x1 // titik y awal
+            for (var y = y1; y > y2; y--) {
+              x = x + dx / Math.abs(dy)
+              gambarTitik(imageData, x, y, r, g, b)
+            }
+          }
+        }
+      }
+
+      // memanggil library canvas 2d
+      var ctx = kanvasPraktikum.getContext('2d')
+
+      //   ctx.fillStyle = 'cyan'
+      //   ctx.fillRect(10, 10, 200, 200)
+      // imageData
+      // RGBA (0 - 255)
+
+      var imageDataPraktikum = ctx.getImageData(
+        0,
+        0,
+        kanvasPraktikum.width,
+        kanvasPraktikum.height
+      )
+
+      // for (var i = 0; i < 100; i++) {
+      //   for (var j = 0; j < 100; j++) {
+      //     gambarTitik(imageDataPraktikum, 20 + i, 20 + j, 255, 0, 0, 255)
+      //   }
+      // }
+
+      for (var i = 0; i < 200; i++) {
+        for (var j = 0; j < 200; j++) {
+          gambarTitik(imageDataPraktikum, 20 + i, 20 + j, 255, 0, 0, 255)
+        }
+      }
+
+      a_dd(imageDataPraktikum, 20, 20, 100, 100, 0, 0, 0)
+      a_dd(imageDataPraktikum, 20, 180, 100, 100, 0, 0, 0)
+      a_dd(imageDataPraktikum, 180, 20, 100, 100, 0, 0, 0)
+      a_dd(imageDataPraktikum, 180, 180, 100, 100, 0, 0, 0)
+
+      ctx.putImageData(imageDataPraktikum, 0, 0)
+    </script>
+  </body>
+</html>
