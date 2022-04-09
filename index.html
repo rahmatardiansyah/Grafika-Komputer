@@ -17,7 +17,7 @@
       // dom
       var kanvasPraktikum = document.querySelector('#canvas1')
 
-      function gambarTitik(temp, x, y, r, g, b, a) {
+      function gambarTitik(temp, x, y, r, g, b, a = 999) {
         var index = 4 * (x + y * kanvasPraktikum.width)
         imageDataPraktikum.data[index] = r
         imageDataPraktikum.data[index + 1] = g
@@ -25,7 +25,7 @@
         imageDataPraktikum.data[index + 3] = a
       }
 
-      function a_dd(imageData, x1, y1, x2, y2, r = 255, g = 0, b = 0) {
+      function a_dd(imageData, x1, y1, x2, y2, r, g, b) {
         var dx = x2 - x1
         var dy = y2 - y1
 
@@ -87,11 +87,11 @@
       //   }
       // }
 
-      for (var i = 0; i < 200; i++) {
-        for (var j = 0; j < 200; j++) {
-          gambarTitik(imageDataPraktikum, 20 + i, 20 + j, 255, 0, 0, 255)
-        }
-      }
+      // for (var i = 0; i < 200; i++) {
+      //   for (var j = 0; j < 200; j++) {
+      //     gambarTitik(imageDataPraktikum, 20 + i, 20 + j, 255, 0, 0)
+      //   }
+      // }
 
       a_dd(imageDataPraktikum, 20, 20, 100, 100, 0, 0, 0)
       a_dd(imageDataPraktikum, 20, 180, 100, 100, 0, 0, 0)

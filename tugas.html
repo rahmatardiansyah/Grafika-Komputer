@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas Grafika Komputer</title>
+  </head>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="500"
+      height="500"
+      style="border: 1px solid #330909"
+    >
+    </canvas>
+
+    <script>
+      const c = document.getElementById('myCanvas')
+      const ctx = c.getContext('2d')
+
+      function lingkaran(x, y, s) {
+        ctx.beginPath()
+        ctx.arc(x, y, s, 0, 2 * Math.PI)
+        ctx.stroke()
+      }
+
+      function elips(x, y, radiusX, radiusY, deg) {
+        const rad = deg * (Math.PI / 180.0)
+
+        ctx.beginPath()
+        ctx.ellipse(x, y, radiusX, radiusY, rad, 0, 2 * Math.PI)
+        ctx.stroke()
+      }
+
+      lingkaran(250, 250, 125)
+      elips(250, 250, 155, 55, 180)
+      elips(250, 250, 155, 55, 90)
+    </script>
+  </body>
+</html>

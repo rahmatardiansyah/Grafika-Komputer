@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lingkaran</title>
+  </head>
+  <body>
+    <!-- <canvas id="myCanvas">
+    </canvas> -->
+
+    <canvas
+      id="myCanvas"
+      width="400"
+      height="400"
+      style="border: 1px solid #330909"
+    >
+    </canvas>
+
+    <script type="text/javascript">
+      var canvas = document.querySelector('#myCanvas')
+      var ctx = canvas.getContext('2d')
+
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+
+      function gbr_titik(imageDataTemp, x, y, r, g, b) {
+        var index
+
+        index = 4 * (x + y * canvas.width)
+        imageDataTemp.data[index] = r
+        imageDataTemp.data[index + 1] = g
+        imageDataTemp.data[index + 2] = b
+        imageDataTemp.data[index + 3] = 255
+      }
+
+      function gbr_lingkaran(imageDataTemp, xc, yc, radius, r, g, b) {
+        // pilih untuk memulai dari x,y
+        // memulai pembuatan lingkaran dari xc- radius sampai dengan yc + radius
+        // menentukan titik y
+        // menggambari titik x,y
+
+        for (var x = xc - radius; x < xc + radius; x++) {
+          // akar dari : r2 + (x - xc)2
+          var y = yc + Math.sqrt(Math.pow(radius, 2) - Math.pow(x - xc, 2))
+          gbr_titik(imageDataTemp, Math.ceil(x), Math.ceil(y), r, g, b)
+          // akar dari : r2 - (x - xc)2
+          var y = yc - Math.sqrt(Math.pow(radius, 2) - Math.pow(x - xc, 2))
+          gbr_titik(imageDataTemp, Math.ceil(x), Math.ceil(y), r, g, b)
+        }
+
+        for (var x = xc - radius; x < xc + radius; x++) {
+          // akar dari : r2 + (y - xc)2
+          var y = yc + Math.sqrt(Math.pow(radius, 2) - Math.pow(x - xc, 2))
+          gbr_titik(imageDataTemp, Math.ceil(y), Math.ceil(x), r, g, b)
+          // akar dari : r2 - (y - xc)2
+          var y = yc - Math.sqrt(Math.pow(radius, 2) - Math.pow(x - xc, 2))
+          gbr_titik(imageDataTemp, Math.ceil(y), Math.ceil(x), r, g, b)
+        }
+      }
+
+      function lingkaran_polar(imageDataTemp, xc, yc, radius, r, g, b) {
+        for (let theta = 0; theta < Math.PI * 2; theta += 0.01) {
+          x = xc + radius * Math.cos(theta)
+          y = yc + radius * Math.sin(theta)
+          gbr_titik(imageData, Math.ceil(x), Math.ceil(y), r, g, b)
+        }
+      }
+
+      lingkaran_polar(imageData, 200, 200, 50, 0, 0, 255)
+
+      gbr_lingkaran(imageData, 200, 200, 100, 255, 0, 0)
+      ctx.putImageData(imageData, 0, 0)
+    </script>
+  </body>
+</html>
+
+<!-- <script type="text/javascript">
+
+    menggambar garis
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.beginPath(); // mulai menggmabar
+    ctx.moveTo(10,10);
+    ctx.lineTo(50,50);
+    ctx.stroke();
+</script> -->
+
+<!-- <script>
+
+    menggambar lingkaran
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.beginPath();
+    ctx.arc(95, 50, 40, 0, 6.3);
+    ctx.stroke();
+</script> -->
