@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Drawing a Polygon</title>
+    <style>
+      #myCanvas {
+        border: 2px solid black;
+        display: block;
+        /* background-color: aqua; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+
+    <script>
+      var canvas = document.getElementById('myCanvas');
+      var ctx = canvas.getContext('2d');
+
+      var numberOfSides = 5;
+      var radius = 70;
+      var x = 170;
+      var y = 150;
+      var angle = (2 * Math.PI) / numberOfSides;
+      ctx.beginPath();
+      ctx.translate(x, y);
+      ctx.rotate((54 * Math.PI) / 180);
+      ctx.moveTo(radius, 0);
+      for (var i = 1; i <= numberOfSides; i++) {
+        ctx.lineTo(radius * Math.cos(i * angle), radius * Math.sin(i * angle));
+      }
+      ctx.fillStyle = 'lightblue';
+      ctx.fill();
+      ctx.strokeStyle = 'lightblue';
+      ctx.stroke();
+
+      var numberOfSides2 = 6;
+      var radius2 = 70;
+      var x2 = 240;
+      var y2 = -320;
+      var angle2 = (2 * Math.PI) / numberOfSides2;
+      ctx.beginPath();
+      ctx.translate(x2, y2);
+      ctx.rotate((37 * Math.PI) / 180);
+      ctx.moveTo(radius, 0);
+      for (var i = 1; i <= numberOfSides2; i++) {
+        ctx.lineTo(
+          radius2 * Math.cos(i * angle2),
+          radius2 * Math.sin(i * angle2)
+        );
+      }
+      ctx.fillStyle = 'lightblue';
+      ctx.fill();
+      ctx.strokeStyle = 'lightblue';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(50, 150);
+      ctx.lineTo(-65, 150);
+      ctx.lineTo(-100, 200);
+      ctx.lineTo(-65, 250);
+      ctx.lineTo(50, 250);
+      ctx.lineTo(10, 200);
+      ctx.lineTo(10, 200);
+
+      ctx.fillStyle = 'lightblue';
+      ctx.strokeStyle = 'lightblue';
+      ctx.fill();
+      ctx.stroke();
+    </script>
+  </body>
+</html>
